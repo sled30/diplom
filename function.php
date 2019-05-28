@@ -5,7 +5,20 @@ function parser_rsi($data_rsi){
     $url = find_url_grant_rsi($data_rsi);
     $teg = find_teg_grant_rsi($data_rsi);
     var_dump($teg);*/
-  find($data_rsi);
+  $source_data = find($data_rsi);
+  //var_dump($source_data);
+   for ($i=0; $i < 8; $i++){
+     // code...
+     $url = 'http://rsci.ru'.$source_data[5][$i];
+     $data = file_get_contents($url);
+     $dop_info = more_rsi($data);
+}
+   var_dump($source_data);
+}
+function more_rsi($data){
+  $match = '/\^{0}.{0,30}участи[е|ю].{0,}/';
+  preg_match_all($match, $data, $list);
+  return $list;
 }
 function find($data_rsi){
   // code...
@@ -22,7 +35,7 @@ function find($data_rsi){
 					.{8,}
 						<a href="(\/grants\/grant_news\/\d{1,}\/\d{3,}.php)" ><h4 class="text-title">(.{3,})\/h4/';
     preg_match_all($match, $data_rsi, $list);
-    var_dump($list);
+    return $list;
 }
 function find_teg_grant_rsi($data_rsi){
   // code...
