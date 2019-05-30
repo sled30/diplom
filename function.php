@@ -1,4 +1,16 @@
 <?php
+phpinfo();
+function parser_rfbr($data_rfbr){
+  $cod = mb_detect_encoding($data_rfbr, $encod_list = mb_detect_order());
+  var_dump($cod);
+  $central = find_central_rfbr($data_rfbr);
+  var_dump($central);
+}
+function find_central_rfbr($data_rfbr){
+$match =  '/<td class="bold"> \W{3,6}_\D{1,2}<\/td>\s{1,9}<td>\s{1,12}<a class="link" href="(\/rffi\/ru\/contest\/o_\d{1,7})">(.{3,})<\/a>\s{2,}<\/td>\s{8}<td class="ta-c"><img src="\/rffi\/pf10_portal\/images\/contest\/cnt-y.png" title="Заявки принимаются" alt="Заявки принимаются"\/> <!--\d{4}--><\/td>\s{8}<td>(\d{2}.\d{2}.\d{4}) (\d{2}:\d{2})/';
+preg_match_all($match, $data_rfbr, $list);
+return $list;
+}
 function parser_rsi($data_rsi){
     // code...
   /*  $date = find_date_grant_rsi($data_rsi);
@@ -13,7 +25,6 @@ function parser_rsi($data_rsi){
      $data = file_get_contents($url);
      $dop_info = more_rsi($data);
 }
-   var_dump($source_data);
 }
 function more_rsi($data){
   $match = '/\^{0}.{0,30}участи[е|ю].{0,}/';
