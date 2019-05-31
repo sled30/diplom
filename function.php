@@ -1,9 +1,11 @@
 <?php
-phpinfo();
+###############################
+###############################
+                                      /*необходима установка пакета php-mbstring
+                                      раскоментировать экстеншион mbstring в php.ini*/
 function parser_rfbr($data_rfbr){
-  $cod = mb_detect_encoding($data_rfbr, $encod_list = mb_detect_order());
-  var_dump($cod);
-  $central = find_central_rfbr($data_rfbr);
+  $cod = mb_convert_encoding($data_rfbr, "utf-8", "windows-1251");
+  $central = find_central_rfbr($cod);
   var_dump($central);
 }
 function find_central_rfbr($data_rfbr){
