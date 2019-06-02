@@ -3,6 +3,13 @@
 ###############################
                                       /*необходима установка пакета php-mbstring
                                       раскоментировать экстеншион mbstring в php.ini*/
+function parser_fpi($data_fpi){
+  // code...
+  $match = '/<a href="(\/tenders\/\d{0,4})\/.{0,}\s{0,}.{0,}\s.{0,}\s{0,11}.{0,}<span>(.{0,})<\/span>.{0,}\s{0,20}<span class="ct-hdr">(.{0,})<\/span>\s{0,16}<p class="ct-p">(.{0,}\s{0,}.{0,}\s{0,}.{0,}\s{0,}.{0,})<\/p>/';
+  preg_match_all($match, $data_fpi, $list);
+  var_dump($list);
+}
+
 function parser_rfbr($data_rfbr){
   $cod = mb_convert_encoding($data_rfbr, "utf-8", "windows-1251");
   $central = find_central_rfbr($cod);
